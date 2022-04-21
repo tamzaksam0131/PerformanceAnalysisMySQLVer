@@ -22,22 +22,14 @@ def sql_graph_output():
     values = []
 
     for i in range(len(a['Table_hist'])):
-        sql_sentence = 'SELECT Text_Table_Name, DRBD_Type,' + ' ' + a['Select_Data_hist'] + ' ' + 'FROM Index_Table' +  a['Table_hist'][i] \
+        sql_sentence = 'SELECT table_name, DRBD_Type,' + ' ' + a['Select_Data_hist'] + ' ' + 'FROM Index_Table' + ','+ a['Table_hist'][i] \
                 + ' ' + 'WHERE Readwrite_type = ' + a['Readwrite_hist']\
                 + ' ' + 'AND Number_of_Job = ' + a['Number_of_Job_hist']\
                 + ' ' + 'AND IOdepth = ' + a['IOdepth_hist']\
                 + ' ' + 'AND blocksize = ' + a['Blocksize_hist']\
                 + ' ' + 'AND Index_Table.Text_Table_Name = ' +  a['Table_hist'][i] + '.table_name'
                     
-        # sql_sentence = 'SELECT h.Text_Table_Name, h.DRBD_Type,' + ' ' + 'h.'+ a['Select_Data_hist']\
-        #         + 'FROM' +  a['Table_hist'][i] + 'AS h' \
-        #         + 'JOIN Index_table AS in ON in.Text_Table_Name = ' +  + a['Table_hist'][i] + '.table_name' \
-        #         + ' ' + 'WHERE Readwrite_type = ' + a['Readwrite_hist']\
-        #         + ' ' + 'AND Number_of_Job = ' + a['Number_of_Job_hist']\
-        #         + ' ' + 'AND IOdepth = ' + a['IOdepth_hist']\
-        #         + ' ' + 'AND blocksize = ' + a['Blocksize_hist']\
-
-        print (sql_sentence)
+        # print (sql_sentence)
         cur.execute(sql_sentence)
     
         for row in cur:
